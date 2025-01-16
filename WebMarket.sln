@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0ED563D4-FF65-4E87-B8DB-80DB51803DE4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{0BDE2E8F-3DF1-40B7-87B3-D3A9D38CB433}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{128828C9-1092-48E3-AF10-9BB4C2A47A17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMarket.Api", "WebMarket.Api\WebMarket.Api.csproj", "{05B4763C-94B7-4FFE-A063-476F6B651BE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMarket.Domain", "WebMarket.Domain\WebMarket.Domain.csproj", "{F250F190-F17B-4099-9348-934F5850A59D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMarket.DAL", "WebMarket.DAL\WebMarket.DAL.csproj", "{92A209BE-566C-43C2-9260-51AAAD59C70B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{05B4763C-94B7-4FFE-A063-476F6B651BE5} = {0BDE2E8F-3DF1-40B7-87B3-D3A9D38CB433}
+		{F250F190-F17B-4099-9348-934F5850A59D} = {0ED563D4-FF65-4E87-B8DB-80DB51803DE4}
+		{92A209BE-566C-43C2-9260-51AAAD59C70B} = {128828C9-1092-48E3-AF10-9BB4C2A47A17}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05B4763C-94B7-4FFE-A063-476F6B651BE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05B4763C-94B7-4FFE-A063-476F6B651BE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05B4763C-94B7-4FFE-A063-476F6B651BE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05B4763C-94B7-4FFE-A063-476F6B651BE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F250F190-F17B-4099-9348-934F5850A59D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F250F190-F17B-4099-9348-934F5850A59D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F250F190-F17B-4099-9348-934F5850A59D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F250F190-F17B-4099-9348-934F5850A59D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92A209BE-566C-43C2-9260-51AAAD59C70B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92A209BE-566C-43C2-9260-51AAAD59C70B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92A209BE-566C-43C2-9260-51AAAD59C70B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92A209BE-566C-43C2-9260-51AAAD59C70B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
