@@ -1,24 +1,19 @@
-﻿using WebMarket.Domain.Interfaces.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using WebMarket.Domain.Interfaces.Repositories;
 
 namespace WebMarket.DAL.Repositories;
 
-public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+public class BaseRepository<TEntity>(ApplicationDbContext dbContext) : IBaseRepository<TEntity>
+    where TEntity : class
 {
-    private readonly ApplicationDbContext _dbContext;
-
-    public BaseRepository(ApplicationDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
-
     public IQueryable<TEntity> GetAll()
     {
-        return _dbContext.Set<TEntity>();
+        return dbContext.Set<TEntity>();
     }
 
     public async Task<TEntity> GetByIdAsync(long id)
     {
-        return await _dbContext.Set<TEntity>().FindAsync(id);
+        return await dbContext.Set<TEntity>().FindAsync(id);
     }
 
     public async Task<TEntity> CreateAsync(TEntity entity)
@@ -26,8 +21,8 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         if (entity == null)
             throw new ArgumentNullException("Entity is null");
         
-        await _dbContext.AddAsync(entity);
-        await _dbContext.SaveChangesAsync();
+        await dbContext.AddAsync(entity);
+        await dbContext.SaveChangesAsync();
 
         return entity;
     }
@@ -37,8 +32,8 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         if (entity == null)
             throw new ArgumentNullException("Entity is null");
         
-        _dbContext.Update(entity);
-        await _dbContext.SaveChangesAsync();
+        dbContext.Update(entity);
+        await dbContext.SaveChangesAsync();
         
         return entity;
     }
@@ -48,9 +43,10 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         if (entity == null)
             throw new ArgumentNullException("Entity is null");
         
-        _dbContext.Remove(entity);
-        await _dbContext.SaveChangesAsync();
+        dbContext.Remove(entity);
+        await dbContext.SaveChangesAsync();
         
         return entity;
     }
+
 }
