@@ -20,4 +20,19 @@
     <data name="InvalidProductDataError" xml:space="preserve">
         <value>Недопустимые значения данных продукта </value>
     </data>
+    <data name="EntityNotFound" xml:space="preserve">
+        <value>Сущность не найдена</value>
+    </data>
+    <data name="CategoryNotFound" xml:space="preserve">
+        <value>Категория не найдена </value>
+    </data>
+    <data name="NoDataProvided" xml:space="preserve">
+        <value>Пустая коллекция</value>
+    </data>
+    <data name="InvalidProductDescription" xml:space="preserve">
+        <value>Ошибка в описании продукта</value>
+    </data>
+    <data name="ProductNotFound" xml:space="preserve">
+        <value>Продукт не найден</value>
+    </data>
 </root>
