@@ -28,8 +28,6 @@ public class DateInterceptor : SaveChangesInterceptor
             }
         }
         
-        
-        
         return base.SavingChanges(eventData, result);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using WebMarket.Domain.Dto;
+using WebMarket.Domain.Dto.Category;
 using WebMarket.Domain.Dto.Product;
 using WebMarket.Domain.Result;
 
@@ -19,7 +20,16 @@ public interface IProductService
     /// <summary>
     /// Добавление нового продукта в систему
     /// </summary>
-    /// <param name="productCreateDto"></param>
+    /// <param name="createProductDto"></param>
+    /// <param name="categoryDto"></param>
     /// <returns></returns>
-    Task<BaseResult> AddProductAsync(ProductCreateDto productCreateDto);
+    Task<BaseResult> AddProductAsync(CreateProductDto createProductDto, CategoryDto categoryDto);
+    
+    Task<BaseResult<ProductDto>> GetProductByIdAsync(long productId);
+    
+    Task<CollectionResult<ProductDto>> GetAllProductsAsync();
+    
+    Task<BaseResult<ProductDto>> DeleteProductAsync(long productId);
+    
+    Task<BaseResult<ProductDto>> UpdateProductAsync(long id, UpdateProductDto updateProductDto);
 }

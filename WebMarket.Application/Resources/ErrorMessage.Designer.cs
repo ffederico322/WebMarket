@@ -60,6 +60,24 @@ namespace WebMarket.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Категория не найдена .
+        /// </summary>
+        internal static string CategoryNotFound {
+            get {
+                return ResourceManager.GetString("CategoryNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сущность не найдена.
+        /// </summary>
+        internal static string EntityNotFound {
+            get {
+                return ResourceManager.GetString("EntityNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Внутренняя ошибка сервера .
         /// </summary>
         internal static string InternalServerError {
@@ -74,6 +92,60 @@ namespace WebMarket.Application.Resources {
         internal static string InvalidProductDataError {
             get {
                 return ResourceManager.GetString("InvalidProductDataError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка в описании продукта.
+        /// </summary>
+        internal static string InvalidProductDescription {
+            get {
+                return ResourceManager.GetString("InvalidProductDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка в названии продукта.
+        /// </summary>
+        internal static string InvalidProductName {
+            get {
+                return ResourceManager.GetString("InvalidProductName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка цены.
+        /// </summary>
+        internal static string InvalidProductPrice {
+            get {
+                return ResourceManager.GetString("InvalidProductPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка количества товаров на складе.
+        /// </summary>
+        internal static string InvalidProductStock {
+            get {
+                return ResourceManager.GetString("InvalidProductStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пустая коллеция .
+        /// </summary>
+        internal static string NoDataProvided {
+            get {
+                return ResourceManager.GetString("NoDataProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Продукт не найден.
+        /// </summary>
+        internal static string ProductNotFound {
+            get {
+                return ResourceManager.GetString("ProductNotFound", resourceCulture);
             }
         }
         
