@@ -23,7 +23,7 @@ public interface IProductService
     /// <param name="createProductDto"></param>
     /// <param name="categoryDto"></param>
     /// <returns></returns>
-    Task<BaseResult> AddProductAsync(CreateProductDto createProductDto, CategoryDto categoryDto);
+    Task<BaseResult> AddProductAsync(CreateProductDto createProductDto, Dto.Category.CategoryDto categoryDto);
     
     Task<BaseResult<ProductDto>> GetProductByIdAsync(long productId);
     

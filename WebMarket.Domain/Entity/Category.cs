@@ -8,6 +8,6 @@ public class Category : IEntityId<long>
     
     public string Name { get; set; }
     
-    public List<Product> Products { get; set; }
+    public List<Product> Products { get; set; } = new();
 }
 
