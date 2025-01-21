@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Logging;
 using WebMarket.Application.Resources;
-using WebMarket.Domain.Dto;
 using WebMarket.Domain.Dto.Category;
 using WebMarket.Domain.Dto.Product;
 using WebMarket.Domain.Entity;
@@ -17,12 +15,12 @@ namespace WebMarket.Application.Services;
 
 public class ProductService(
     IBaseRepository<Product> productRepository,
-    ILogger logger,
-    IMapper mapper,
     IProductValidator productValidator,
     IBaseRepository<Category> categoryRepository,
     ICollectionValidator collectionValidator,
-    IBaseValidator<Product> baseValidator)
+    IBaseValidator<Product> baseValidator,
+    ILogger logger,
+    IMapper mapper)
     : IProductService
 {
     /// <inheritdoc />
@@ -69,7 +67,8 @@ public class ProductService(
     {
         try
         {
-            var nullValidation = collectionValidator.ValidateCollection(createProductDto);
+            var nullValidation = collectionValidator.ValidateCollection(createProductDto, 
+                categoryCreateDto);
             if (!nullValidation.IsSuccess)
             {
                 return new BaseResult

@@ -60,11 +60,47 @@ namespace WebMarket.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Элемент корзины не найден.
+        /// </summary>
+        internal static string CartItemNotFound {
+            get {
+                return ResourceManager.GetString("CartItemNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Корзина не найдена.
+        /// </summary>
+        internal static string CartNotFound {
+            get {
+                return ResourceManager.GetString("CartNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Категории не найдены.
+        /// </summary>
+        internal static string CategoriesNotFound {
+            get {
+                return ResourceManager.GetString("CategoriesNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Категория не найдена .
         /// </summary>
         internal static string CategoryNotFound {
             get {
                 return ResourceManager.GetString("CategoryNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пустая корзина .
+        /// </summary>
+        internal static string EmptyCart {
+            get {
+                return ResourceManager.GetString("EmptyCart", resourceCulture);
             }
         }
         
@@ -137,6 +173,33 @@ namespace WebMarket.Application.Resources {
         internal static string NoDataProvided {
             get {
                 return ResourceManager.GetString("NoDataProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Заказ уже отменен.
+        /// </summary>
+        internal static string OrderAlreadyCancelled {
+            get {
+                return ResourceManager.GetString("OrderAlreadyCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Заказ не найден.
+        /// </summary>
+        internal static string OrderNotFound {
+            get {
+                return ResourceManager.GetString("OrderNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Заказы не найдены .
+        /// </summary>
+        internal static string OrdersNotFound {
+            get {
+                return ResourceManager.GetString("OrdersNotFound", resourceCulture);
             }
         }
         

@@ -14,6 +14,16 @@ public enum ErrorCodes
     
     // Category 
     CategoryNotFound = 10,
+    CategoriesNotFound = 11,
+    
+    // Cart
+    CartNotFound = 12,
+    CartItemNotFound = 13,
+    EmptyCart = 14,
+    
+    // Order
+    OrdersNotFound = 15,
+    OrderAlreadyCancelled = 16,
     
     // Entity 50 - 60
     EntityNotFound = 50,
@@ -22,5 +32,6 @@ public enum ErrorCodes
     NoDataProvided = 80,
     
     
-    InternalServerError = 100,
+    InternalServerError = 100
+    
 }

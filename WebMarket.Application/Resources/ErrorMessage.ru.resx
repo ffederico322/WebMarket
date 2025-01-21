@@ -35,4 +35,13 @@
     <data name="ProductNotFound" xml:space="preserve">
         <value>Продукт не найден</value>
     </data>
+    <data name="CartNotFound" xml:space="preserve">
+        <value>Корзина не найдена</value>
+    </data>
+    <data name="CartItemNotFound" xml:space="preserve">
+        <value>Элемент корзины не найден</value>
+    </data>
+    <data name="EmptyCart" xml:space="preserve">
+        <value>Пустая корзина</value>
+    </data>
 </root>
