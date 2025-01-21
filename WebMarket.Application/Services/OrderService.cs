@@ -19,7 +19,7 @@ public class OrderService(
     IBaseRepository<Product> productRepository,
     IBaseRepository<Cart> cartRepository,
     IBaseValidator<Order> baseValidator,
-    ILogger logger,
+    ILogger<OrderService> logger,
     IMapper mapper) : IOrderService
 {
     public async Task<BaseResult<OrderDto>> CreateOrderFromCartAsync(long userId)

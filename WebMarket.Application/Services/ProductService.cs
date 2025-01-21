@@ -19,7 +19,7 @@ public class ProductService(
     IBaseRepository<Category> categoryRepository,
     ICollectionValidator collectionValidator,
     IBaseValidator<Product> baseValidator,
-    ILogger logger,
+    ILogger<ProductService> logger,
     IMapper mapper)
     : IProductService
 {

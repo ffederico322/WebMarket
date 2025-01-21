@@ -12,12 +12,12 @@ using WebMarket.Domain.Result;
 
 namespace WebMarket.Application.Services;
 
-public class CartServive(
+public class CartService(
     IBaseRepository<Cart> cartRepository,
     IBaseRepository<CartItem> cartItemRepository,
     IBaseRepository<Product> productRepository,
     IBaseValidator<Cart> baseValidator,
-    ILogger logger,
+    ILogger<CartService> logger,
     IMapper mapper) : ICartService
 {
     public async Task<BaseResult<CartDto>> GetCartByUserIdAsync(long userId)

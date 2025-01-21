@@ -16,7 +16,7 @@ namespace WebMarket.Application.Services;
 public class CategoryService(
     IBaseRepository<Category> categoryRepository,
     IBaseValidator<Category> baseValidator,
-    ILogger logger,
+    ILogger<CategoryService> logger,
     IMapper mapper) : ICategoryService
 {
     public async Task<CollectionResult<CategoryDto>> GetAllCategoriesAsync()

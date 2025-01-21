@@ -5,7 +5,7 @@ using WebMarket.Domain.Result;
 
 namespace WebMarket.Application.Validations;
 
-public class CollectionValidator(IBaseValidator<object> baseValidator)
+public class CollectionValidator(IBaseValidator<object> baseValidator) : ICollectionValidator
 {
     public BaseResult ValidateCollection(params object[] models)
     {
