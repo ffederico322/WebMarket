@@ -1,4 +1,6 @@
-﻿namespace WebMarket.Domain.Dto.CartItem;
+﻿using WebMarket.Domain.Dto.Product;
+
+namespace WebMarket.Domain.Dto.CartItem;
 
 public record CartItemDto(long Id, long CartId, long ProductId, 
-    long Quantity, decimal Price);
+    long Quantity, decimal Price, ProductDto Product);
