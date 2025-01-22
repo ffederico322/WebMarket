@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using WebMarket.Domain.Dto.Cart;
+using WebMarket.Domain.Dto.CartItem;
 using WebMarket.Domain.Dto.Order;
 using WebMarket.Domain.Entity;
 
@@ -10,6 +11,6 @@ public class CartMapping : Profile
     public CartMapping()
     {
         CreateMap<Cart, CartDto>().ReverseMap();
-        CreateMap<CartItem, CartDto>().ReverseMap();
+        CreateMap<CartItem, CartItemDto>().ReverseMap();
     }
 }

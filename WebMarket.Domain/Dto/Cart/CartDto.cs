@@ -2,4 +2,4 @@
 
 namespace WebMarket.Domain.Dto.Cart;
 
-public record CartDto(int Id, decimal TotalPrice, IEnumerable<CartItemDto> CartItems, long UserId);
+public record CartDto(long Id, decimal TotalPrice, IEnumerable<CartItemDto> CartItems, long UserId);
