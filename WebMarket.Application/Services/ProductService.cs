@@ -63,18 +63,17 @@ public class ProductService(
     }
 
     /// <inheritdoc />
-    public async Task<BaseResult> AddProductAsync(CreateProductDto createProductDto, CategoryDto categoryCreateDto)
+    public async Task<BaseResult> AddProductAsync(CreateProductDto? createProductDto)
     {
         try
         {
-            var nullValidation = collectionValidator.ValidateCollection(createProductDto, 
-                categoryCreateDto);
-            if (!nullValidation.IsSuccess)
+            if (createProductDto == null)
             {
-                return new BaseResult
+                logger.LogWarning("CreateProductDto пустое");
+                return new BaseResult<ProductDto>
                 {
-                    ErrorMessage = ErrorMessage.EntityNotFound,
-                    ErrorCode = (int)ErrorCodes.EntityNotFound,
+                    ErrorMessage = ErrorMessage.InvalidInput,
+                    ErrorCode = (int)ErrorCodes.InvalidInput
                 };
             }
             
@@ -112,14 +111,23 @@ public class ProductService(
     }
 
     public async Task<BaseResult<ProductDto>> GetProductByIdAsync(long productId)
-    {
-        ProductDto? product;
-
+    { 
         try
         {
-            product = await productRepository.GetAll()
-                .Select(x => new ProductDto(x.Id, x.Name, x.CategoryId, x.Description, x.Image, x.Price))
-                .FirstOrDefaultAsync(x => x.Id == productId);
+            var product = await productRepository.GetByIdAsync(productId);
+            if (product == null)
+            {
+                logger.LogWarning("Продукт с {Id} не найден", productId);
+                return new BaseResult<ProductDto>()
+                {
+                    ErrorMessage = ErrorMessage.ProductNotFound,
+                    ErrorCode = (int)ErrorCodes.ProductNotFound,
+                };
+            }
+            return new BaseResult<ProductDto>()
+            {
+                Data = mapper.Map<ProductDto>(product)
+            };
         }
         catch (Exception ex)
         {
@@ -130,33 +138,31 @@ public class ProductService(
                 ErrorCode = (int)ErrorCodes.InternalServerError,
             };
         }
-
-        if (product == null)
-        {
-            logger.LogWarning("Продукт с {Id} не найден", productId);
-            return new BaseResult<ProductDto>()
-            {
-                ErrorMessage = ErrorMessage.ProductNotFound,
-                ErrorCode = (int)ErrorCodes.ProductNotFound,
-            };
-        }
-
-        return new BaseResult<ProductDto>()
-        {
-            Data = product,
-        };
     }
 
     public async Task<CollectionResult<ProductDto>> GetAllProductsAsync()
     {
-        ProductDto[] products;
-
         try
         {
-            products = await productRepository.GetAll()
+            var products = await productRepository.GetAll()
                 .Where(p => p.Stock > 0)
-                .Select(x => new ProductDto(x.Id, x.Name, x.CategoryId, x.Description, x.Image, x.Price))
                 .ToArrayAsync();
+            
+            if (!products.Any())
+            {
+                logger.LogWarning(ErrorMessage.ProductsNotFound, products.Length);
+                return new CollectionResult<ProductDto>()
+                {
+                    ErrorMessage = ErrorMessage.ProductsNotFound,
+                    ErrorCode = (int)ErrorCodes.ProductsNotFound,
+                };
+            }
+            
+            return new CollectionResult<ProductDto>()
+            {
+                Data = mapper.Map<ProductDto[]>(products),
+                Count = products.Length
+            };
         }
         catch (Exception ex)
         {
@@ -167,22 +173,6 @@ public class ProductService(
                 ErrorCode = (int)ErrorCodes.InternalServerError,
             };
         }
-
-        if (products.Any())
-        {
-            logger.LogWarning(ErrorMessage.ProductsNotFound, products.Length);
-            return new CollectionResult<ProductDto>()
-            {
-                ErrorMessage = ErrorMessage.ProductsNotFound,
-                ErrorCode = (int)ErrorCodes.ProductsNotFound,
-            };
-        }
-        
-        return new CollectionResult<ProductDto>()
-        {
-            Data = products,
-            Count = products.Length
-        };
     }
     
     public async Task<BaseResult<ProductDto>> DeleteProductAsync(long productId)
@@ -221,11 +211,11 @@ public class ProductService(
         }
     }
 
-    public async Task<BaseResult<ProductDto>> UpdateProductAsync(long id ,UpdateProductDto updateProductDto)
+    public async Task<BaseResult<ProductDto>> UpdateProductAsync(long productId ,UpdateProductDto updateProductDto)
     {
         try
         {
-            var product = await productRepository.GetByIdAsync(id);
+            var product = await productRepository.GetByIdAsync(productId);
             var result = baseValidator.ValidateOnNull(product);
             if (!result.IsSuccess)
             {

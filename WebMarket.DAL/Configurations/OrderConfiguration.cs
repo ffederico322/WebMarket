@@ -11,6 +11,15 @@ public class OrderConfigaration : IEntityTypeConfiguration<Order>
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
         builder.Property(x => x.IsActive).HasDefaultValue(true);
         builder.Property(x => x.TotalPrice).IsRequired();
+        builder.Property(x => x.CreatedAt)
+            .HasConversion(
+                v => v.ToUniversalTime(),
+                v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
+            
+        builder.Property(x => x.UpdatedAt)
+            .HasConversion(
+                v => v.ToUniversalTime(),
+                v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
 
         builder.HasMany<OrderItem>(x => x.OrderItems)
             .WithOne(x => x.Order)

@@ -195,7 +195,7 @@ public class OrderService(
             var orders = await orderRepository.GetAll()
                 .Include(o => o.OrderItems)
                 .ThenInclude(oi => oi.Product)
-                .Where(o => o.UserId == userId && !o.IsActive)
+                .Where(o => o.UserId == userId && o.IsActive)
                 .ToListAsync();
 
             if (!orders.Any())

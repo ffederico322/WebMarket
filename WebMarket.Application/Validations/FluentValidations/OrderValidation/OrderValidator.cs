@@ -38,7 +38,7 @@ public class OrderValidator : AbstractValidator<OrderDto>
         RuleFor(order => order.CreatedAt)
             .NotNull()
             .WithMessage("Дата создания заказа не может быть null")
-            .LessThanOrEqualTo(DateTime.UtcNow.ToString())
+            .LessThanOrEqualTo(DateTime.UtcNow)
             .WithMessage("Дата создания заказа не может быть в будущем");
 
         RuleFor(order => order.UpdatedAt)
