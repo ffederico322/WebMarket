@@ -21,9 +21,8 @@ public interface IProductService
     /// Добавление нового продукта в систему
     /// </summary>
     /// <param name="createProductDto"></param>
-    /// <param name="categoryDto"></param>
     /// <returns></returns>
-    Task<BaseResult> AddProductAsync(CreateProductDto createProductDto, Dto.Category.CategoryDto categoryDto);
+    Task<BaseResult> AddProductAsync(CreateProductDto createProductDto);
     
     Task<BaseResult<ProductDto>> GetProductByIdAsync(long productId);
     
