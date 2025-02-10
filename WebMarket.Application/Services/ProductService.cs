@@ -193,8 +193,9 @@ public class ProductService(
                 }
             }
             
-            await productRepository.RemoveAsync(product);
-
+            productRepository.Remove(product);
+            await productRepository.SaveChangesAsync();
+                
             return new BaseResult<ProductDto>()
             {
                 Data = mapper.Map<Product, ProductDto>(product),
@@ -236,11 +237,12 @@ public class ProductService(
             product.Price = updateProductDto.Price;
             product.Stock = updateProductDto.Stock;
             
-            await productRepository.UpdateAsync(product);
+            var updatedProduct = productRepository.Update(product);
+            await productRepository.SaveChangesAsync();
 
             return new BaseResult<ProductDto>()
             {
-                Data = mapper.Map<Product, ProductDto>(product),
+                Data = mapper.Map<Product, ProductDto>(updatedProduct),
             };
         }
         catch (Exception ex)

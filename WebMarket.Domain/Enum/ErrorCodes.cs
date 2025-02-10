@@ -25,12 +25,23 @@ public enum ErrorCodes
     OrdersNotFound = 15,
     OrderAlreadyCancelled = 16,
     
+    // User
+    UserNotFound = 17,
+    UserUnauthorized = 18,
+    
     // Entity 50 - 60
     EntityNotFound = 50,
     
+    // Role
+    RoleAlreadyExists = 51,
+    RoleNotFound = 52,
+    
     // Остальные 80 - 90
     NoDataProvided = 80,
-    
+    InvalidInput = 81,
+    PasswordNotEqualsPassworConfirm = 82,
+    UserAlreadyExists = 83,
+    PasswordIsWrong = 84,
     
     InternalServerError = 100
     

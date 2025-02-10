@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using WebMarket.Application.Resources;
 using WebMarket.Domain.Dto.Category;
 using WebMarket.Domain.Dto.Product;
@@ -10,12 +11,16 @@ using WebMarket.Domain.Interfaces.Repositories;
 using WebMarket.Domain.Interfaces.Services;
 using WebMarket.Domain.Interfaces.Validations;
 using WebMarket.Domain.Result;
+using WebMarket.Domain.Settings;
+using WebMarket.Producer.Interfaces;
 
 namespace WebMarket.Application.Services;
 
 public class CategoryService(
     IBaseRepository<Category> categoryRepository,
     IBaseValidator<Category> baseValidator,
+    IMessageProducer messageProducer,
+    IOptions<RabbitMqSettings> rabbitMqOptions, 
     ILogger<CategoryService> logger,
     IMapper mapper) : ICategoryService
 {
@@ -107,6 +112,8 @@ public class CategoryService(
             
             await categoryRepository.CreateAsync(category);
 
+            messageProducer.SendMessage(category, rabbitMqOptions.Value.RoutingKey, rabbitMqOptions.Value.ExchangeName);
+            
             return new BaseResult<CategoryDto>()
             {
                 Data = mapper.Map<Category, CategoryDto>(category),
@@ -141,7 +148,9 @@ public class CategoryService(
         
             category.Name = categoryDto.Name;
         
-            await categoryRepository.UpdateAsync(category);
+            categoryRepository.Update(category);
+            await categoryRepository.SaveChangesAsync();
+            
             return new BaseResult<CategoryDto>()
             {
                 Data = mapper.Map<Category, CategoryDto>(category),
@@ -174,7 +183,9 @@ public class CategoryService(
                 };
             }
         
-            await categoryRepository.RemoveAsync(category);
+            categoryRepository.Remove(category);
+            await categoryRepository.SaveChangesAsync();
+            
             return new BaseResult<CategoryDto>()
             {
                 Data = mapper.Map<Category, CategoryDto>(category),

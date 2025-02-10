@@ -11,6 +11,11 @@ public class BaseRepository<TEntity>(ApplicationDbContext dbContext) : IBaseRepo
         return dbContext.Set<TEntity>();
     }
 
+    public async Task<int> SaveChangesAsync()
+    {
+        return await dbContext.SaveChangesAsync();
+    }
+
     public async Task<TEntity> GetByIdAsync(long id)
     {
         return await dbContext.Set<TEntity>().FindAsync(id);
@@ -27,26 +32,22 @@ public class BaseRepository<TEntity>(ApplicationDbContext dbContext) : IBaseRepo
         return entity;
     }
 
-    public async Task<TEntity> UpdateAsync(TEntity entity)
+    public TEntity Update(TEntity entity)
     {
         if (entity == null)
             throw new ArgumentNullException("Entity is null");
         
         dbContext.Update(entity);
-        await dbContext.SaveChangesAsync();
         
         return entity;
     }
 
-    public async Task<TEntity> RemoveAsync(TEntity entity)
+    public void Remove(TEntity entity)
     {
         if (entity == null)
             throw new ArgumentNullException("Entity is null");
         
         dbContext.Remove(entity);
-        await dbContext.SaveChangesAsync();
-        
-        return entity;
     }
 
 }

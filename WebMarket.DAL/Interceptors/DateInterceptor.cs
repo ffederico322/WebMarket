@@ -19,12 +19,12 @@ public class DateInterceptor : SaveChangesInterceptor
         {
             if (entry.State == EntityState.Added)
             {
-                entry.Property(x => x.CreatedAt).CurrentValue = DateTime.Now;
+                entry.Property(x => x.CreatedAt).CurrentValue = DateTime.UtcNow;
             }
 
             if (entry.State == EntityState.Modified)
             {
-                entry.Property(x => x.UpdatedAt).CurrentValue = DateTime.Now;
+                entry.Property(x => x.UpdatedAt).CurrentValue = DateTime.UtcNow;
             }
         }
         

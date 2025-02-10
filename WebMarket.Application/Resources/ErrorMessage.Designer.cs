@@ -123,6 +123,15 @@ namespace WebMarket.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Некорректный ввод.
+        /// </summary>
+        internal static string InvalidInput {
+            get {
+                return ResourceManager.GetString("InvalidInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Недопустимые значения данных продукта .
         /// </summary>
         internal static string InvalidProductDataError {
@@ -204,6 +213,24 @@ namespace WebMarket.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Неверный пароль.
+        /// </summary>
+        internal static string PasswordIsWrong {
+            get {
+                return ResourceManager.GetString("PasswordIsWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пароли не совпадают.
+        /// </summary>
+        internal static string PasswordNotEqualsPasswordConfirm {
+            get {
+                return ResourceManager.GetString("PasswordNotEqualsPasswordConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Продукт не найден.
         /// </summary>
         internal static string ProductNotFound {
@@ -218,6 +245,42 @@ namespace WebMarket.Application.Resources {
         internal static string ProductsNotFound {
             get {
                 return ResourceManager.GetString("ProductsNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Такая роль уже существует .
+        /// </summary>
+        internal static string RoleAlreadyExists {
+            get {
+                return ResourceManager.GetString("RoleAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to роль не найдена .
+        /// </summary>
+        internal static string RoleNotFound {
+            get {
+                return ResourceManager.GetString("RoleNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пользователь с таким логином уже существует .
+        /// </summary>
+        internal static string UserAlreadyExists {
+            get {
+                return ResourceManager.GetString("UserAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пользователь не найден .
+        /// </summary>
+        internal static string UserNotFound {
+            get {
+                return ResourceManager.GetString("UserNotFound", resourceCulture);
             }
         }
     }

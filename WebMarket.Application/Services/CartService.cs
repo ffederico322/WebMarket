@@ -90,7 +90,8 @@ public class CartService(
             {
                 existingItem.Quantity += quantity;
                 existingItem.Price = product.Price * existingItem.Quantity;
-                await cartRepository.UpdateAsync(cart);
+                cartRepository.Update(cart);
+                await cartRepository.SaveChangesAsync();
             }
             else
             {
@@ -106,7 +107,8 @@ public class CartService(
             }
             
             cart.TotalPrice = cart.CartItems.Sum(x => x.Price);
-            await cartRepository.UpdateAsync(cart);
+            cartRepository.Update(cart);
+            await cartRepository.SaveChangesAsync();
 
             return new BaseResult<CartDto>()
             {
@@ -154,11 +156,13 @@ public class CartService(
                 };
             }
             
-            await cartItemRepository.RemoveAsync(cartItem);
+            cartItemRepository.Remove(cartItem);
+            await cartItemRepository.SaveChangesAsync();
             
             cart.TotalPrice = cart.CartItems.Sum(x => x.Price);
-            await cartRepository.UpdateAsync(cart);
-
+            cartRepository.Update(cart);
+            await cartRepository.SaveChangesAsync();
+            
             return new BaseResult<CartDto>
             {
                 Data = mapper.Map<CartDto>(cart),
@@ -209,11 +213,13 @@ public class CartService(
             cartItem.Quantity = quantity;
             cartItem.Price = product.Price * quantity;
             
-            await cartItemRepository.UpdateAsync(cartItem);
+            cartItemRepository.Update(cartItem);
+            await cartItemRepository.SaveChangesAsync();
             
             cart.TotalPrice = cart.CartItems.Sum(x => x.Price);
-            await cartRepository.UpdateAsync(cart);
-
+            cartRepository.Update(cart);
+            await cartRepository.SaveChangesAsync();
+            
             return new BaseResult<CartDto>
             {
                 Data = mapper.Map<CartDto>(cart),
@@ -252,12 +258,14 @@ public class CartService(
 
             foreach (var cartItem in cartItems)
             {
-                await cartItemRepository.RemoveAsync(cartItem);
+                cartItemRepository.Remove(cartItem);
+                await cartItemRepository.SaveChangesAsync();
             }
             
             cart.CartItems.Clear();
             cart.TotalPrice = 0;
-            await cartRepository.UpdateAsync(cart);
+            cartRepository.Update(cart);
+            await cartRepository.SaveChangesAsync();
 
             return new BaseResult<CartDto>
             {

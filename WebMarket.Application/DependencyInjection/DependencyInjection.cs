@@ -58,7 +58,8 @@ public static class DependencyInjection
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<ICartService, CartService>();
         services.AddScoped<IOrderService, OrderService>();
-        /*services.AddScoped<IAuthService, AuthService>();*/
-        /*services.AddScoped<ITokenService, TokenService>();*/
+        services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IRoleService, RoleService>();
     }
 }

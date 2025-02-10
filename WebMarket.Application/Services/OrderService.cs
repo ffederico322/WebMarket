@@ -46,8 +46,8 @@ public class OrderService(
                 CartId = cart.Id,
                 IsActive = true,
                 TotalPrice = cart.TotalPrice,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
                 OrderItems = cart.CartItems.Select(ci => new OrderItem
                 {
                     ProductId = ci.ProductId,
@@ -170,8 +170,9 @@ public class OrderService(
             order.IsActive = false;
             order.UpdatedAt = DateTime.Now;
             
-            await orderRepository.UpdateAsync(order);
-
+            orderRepository.Update(order);
+            await orderRepository.SaveChangesAsync();
+            
             return new BaseResult<OrderDto>
             {
                 Data = mapper.Map<OrderDto>(order)

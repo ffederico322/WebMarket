@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WebMarket.DAL.Interceptors;
 using WebMarket.DAL.Repositories;
 using WebMarket.Domain.Entity;
+using WebMarket.Domain.Interfaces.Databases;
 using WebMarket.Domain.Interfaces.Repositories;
 
 namespace WebMarket.DAL.DependencyInjection;
@@ -24,8 +25,11 @@ public static class DependencyInjection
 
     private static void InitRepositories(this IServiceCollection services)
     {
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IBaseRepository<User>, BaseRepository<User>>();
-        /*services.AddScoped<IBaseRepository<UserToken>, BaseRepository<UserToken>>();*/
+        services.AddScoped<IBaseRepository<Role>, BaseRepository<Role>>();
+        services.AddScoped<IBaseRepository<UserRole>, BaseRepository<UserRole>>();
+        services.AddScoped<IBaseRepository<UserToken>, BaseRepository<UserToken>>();
         services.AddScoped<IBaseRepository<Order>, BaseRepository<Order>>();
         services.AddScoped<IBaseRepository<Product>, BaseRepository<Product>>();
         services.AddScoped<IBaseRepository<Category>, BaseRepository<Category>>();

@@ -16,6 +16,12 @@ public class CategoryConfigaration : IEntityTypeConfiguration<Category>
             .HasForeignKey(x => x.CategoryId)
             .HasPrincipalKey(x => x.Id)
             .OnDelete(DeleteBehavior.Cascade);
+
+        /*builder.HasData(new Category
+        {
+            Id = 1,
+            Name = "abc"
+        });*/
     }
     
 }

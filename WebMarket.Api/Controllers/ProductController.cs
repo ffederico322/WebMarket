@@ -12,14 +12,6 @@ namespace WebMarket.Api.Controllers;
 [Route("api/v{version:apiVersion}/[controller]")]
 public class ProductController(IProductService productService) : ControllerBase
 {
-    /// <summary>
-    /// Создание продукта
-    /// </summary>
-    /// <param name="productId"></param>
-    /// <remarks>
-    /// Request for create product
-    /// POST
-    /// </remarks>
     [HttpGet("product/{productId}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

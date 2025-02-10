@@ -13,8 +13,12 @@ public class User : IEntityId<long>
     public string Password { get; set; }
     
     public List<Cart> Carts { get; set; }
-    
+
     public List<Order> Orders { get; set; }
+    
+    public List<Role> Roles { get; set; }
+    
+    public UserToken UserToken { get; set; }
     
     public DateTime CreatedAt { get; set; }
 
