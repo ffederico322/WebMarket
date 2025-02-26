@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using WebMarket.Application.Resources;
-using WebMarket.Domain.Dto.Category;
 using WebMarket.Domain.Dto.Product;
 using WebMarket.Domain.Entity;
 using WebMarket.Domain.Enum;
+using WebMarket.Domain.Extensions;
 using WebMarket.Domain.Interfaces.Repositories;
 using WebMarket.Domain.Interfaces.Services;
 using WebMarket.Domain.Interfaces.Validations;
@@ -19,6 +20,7 @@ public class ProductService(
     IBaseRepository<Category> categoryRepository,
     ICollectionValidator collectionValidator,
     IBaseValidator<Product> baseValidator,
+    IDistributedCache distributedCache,
     ILogger<ProductService> logger,
     IMapper mapper)
     : IProductService
@@ -124,6 +126,7 @@ public class ProductService(
                     ErrorCode = (int)ErrorCodes.ProductNotFound,
                 };
             }
+            
             return new BaseResult<ProductDto>()
             {
                 Data = mapper.Map<ProductDto>(product)

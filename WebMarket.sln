@@ -18,6 +18,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMarket.Producer", "WebMa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMarket.Consumer", "WebMarket.Consumer\WebMarket.Consumer.csproj", "{EF84B20D-AA3B-4B85-8CA5-00949F03890E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E02029C4-BE4E-4BF6-9D2C-5E2FE58A3EB0}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		prometheus.yml = prometheus.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{C18D2350-2119-4D90-AB96-3D98AB4CDC5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMarket.Tests", "WebMarket.Tests\WebMarket.Tests.csproj", "{0CFF306E-73E7-44A3-8173-57B91902002A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +40,7 @@ Global
 		{8AF5D2DA-5C6E-43D3-B232-83D6C6AACEC2} = {0ED563D4-FF65-4E87-B8DB-80DB51803DE4}
 		{E89D276B-41CE-417B-AB31-45ABC7366149} = {128828C9-1092-48E3-AF10-9BB4C2A47A17}
 		{EF84B20D-AA3B-4B85-8CA5-00949F03890E} = {128828C9-1092-48E3-AF10-9BB4C2A47A17}
+		{0CFF306E-73E7-44A3-8173-57B91902002A} = {C18D2350-2119-4D90-AB96-3D98AB4CDC5C}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{05B4763C-94B7-4FFE-A063-476F6B651BE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -56,5 +67,9 @@ Global
 		{EF84B20D-AA3B-4B85-8CA5-00949F03890E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF84B20D-AA3B-4B85-8CA5-00949F03890E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF84B20D-AA3B-4B85-8CA5-00949F03890E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CFF306E-73E7-44A3-8173-57B91902002A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CFF306E-73E7-44A3-8173-57B91902002A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CFF306E-73E7-44A3-8173-57B91902002A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CFF306E-73E7-44A3-8173-57B91902002A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

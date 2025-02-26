@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebMarket.Application.Resources;
@@ -7,6 +9,7 @@ using WebMarket.Domain.Dto.Category;
 using WebMarket.Domain.Dto.Product;
 using WebMarket.Domain.Entity;
 using WebMarket.Domain.Enum;
+using WebMarket.Domain.Extensions;
 using WebMarket.Domain.Interfaces.Repositories;
 using WebMarket.Domain.Interfaces.Services;
 using WebMarket.Domain.Interfaces.Validations;
@@ -21,6 +24,7 @@ public class CategoryService(
     IBaseValidator<Category> baseValidator,
     IMessageProducer messageProducer,
     IOptions<RabbitMqSettings> rabbitMqOptions, 
+    IDistributedCache cache,
     ILogger<CategoryService> logger,
     IMapper mapper) : ICategoryService
 {
@@ -62,21 +66,44 @@ public class CategoryService(
     {
         try
         {
-            var category = await categoryRepository.GetByIdAsync(categoryId);
+            // Создаем константу для ключа кэша
+            var cacheKey = $"{nameof(CategoryService)}:{categoryId}";
             
-            if (category == null)
+            // Проверяем кэш с использованием метода расширения
+            var categoryDto = cache.GetObject<CategoryDto>(cacheKey);
+            
+            if (categoryDto != null)
             {
-                logger.LogWarning("Категория с {Id} не найден", categoryId);
-                return new BaseResult<CategoryDto>()
+                logger.LogDebug("Категория с ID {CategoryId} получена из кэша", categoryId);
+                return new BaseResult<CategoryDto>
                 {
-                    ErrorMessage = ErrorMessage.CategoriesNotFound,
-                    ErrorCode = (int)ErrorCodes.CategoriesNotFound,
+                    Data = categoryDto
                 };
             }
             
-            return new BaseResult<CategoryDto>()
+            // Получаем из репозитория 
+            var category = await categoryRepository.GetByIdAsync(categoryId);
+            if (category == null)
             {
-                Data = mapper.Map<CategoryDto>(category),
+                logger.LogWarning("Категория с ID {CategoryId} не найдена", categoryId);
+                return new BaseResult<CategoryDto>
+                {
+                    ErrorMessage = ErrorMessage.CategoriesNotFound,
+                    ErrorCode = (int)ErrorCodes.CategoriesNotFound
+                };
+            }
+            
+            var result = mapper.Map<CategoryDto>(category);
+            
+            cache.SetObject(cacheKey, result, new DistributedCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5)
+            });
+            
+            logger.LogDebug("Категория с ID {CategoryId} получена из БД и сохранена в кэш", categoryId);
+            return new BaseResult<CategoryDto>
+            {
+                Data = result
             };
         }
         catch (Exception ex)

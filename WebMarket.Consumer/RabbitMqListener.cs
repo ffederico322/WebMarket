@@ -14,11 +14,10 @@ public class RabbitMqListener : BackgroundService
     private readonly IModel _channel;
     private readonly IOptions<RabbitMqSettings> _options;
     
-
     public RabbitMqListener(IOptions<RabbitMqSettings> options)
     {
         _options = options;
-        var factory = new ConnectionFactory() { HostName = "localhost"};
+        var factory = new ConnectionFactory() { HostName = "localhost" };
         _connection = factory.CreateConnection();
         _channel = _connection.CreateModel();
         _channel.QueueDeclare(_options.Value.QueueName, durable: true, exclusive: false, autoDelete: false, arguments: null);

@@ -11,6 +11,8 @@ COPY ["WebMarket.Api/WebMarket.Api.csproj", "WebMarket.Api/"]
 COPY ["WebMarket.DAL/WebMarket.DAL.csproj", "WebMarket.DAL/"]
 COPY ["WebMarket.Domain/WebMarket.Domain.csproj", "WebMarket.Domain/"]
 COPY ["WebMarket.Application/WebMarket.Application.csproj", "WebMarket.Application/"]
+COPY ["WebMarket.Consumer/WebMarket.Consumer.csproj", "WebMarket.Consumer/"]
+COPY ["WebMarket.Producer/WebMarket.Producer.csproj", "WebMarket.Producer/"]
 RUN dotnet restore "WebMarket.Api/WebMarket.Api.csproj"
 COPY . .
 WORKDIR "/src/WebMarket.Api"
