@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebMarket.Application.Mapping;
 using WebMarket.Application.Services;
@@ -20,14 +21,26 @@ using WebMarket.Domain.Dto.Product;
 using WebMarket.Domain.Interfaces;
 using WebMarket.Domain.Interfaces.Services;
 using WebMarket.Domain.Interfaces.Validations;
+using WebMarket.Domain.Settings;
 
 namespace WebMarket.Application.DependencyInjection;
 
 public static class DependencyInjection
 {
-    public static void AddApplication(this IServiceCollection services)
+    public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddAutoMapper(typeof(ProductMapping));
+        var options = configuration.GetSection(nameof(RedisSettings));
+        var redisUrl = options["Url"];
+        var instanceName = options["InstanceName"];
+
+        services.AddStackExchangeRedisCache(redisCacheOptions =>
+        {
+            redisCacheOptions.Configuration = redisUrl;
+            redisCacheOptions.InstanceName = instanceName;
+        });
+        
+        services.AddMediatR(cf => cf.RegisterServicesFromAssemblies(typeof(DependencyInjection).Assembly));
         
         InitServices(services);
     }

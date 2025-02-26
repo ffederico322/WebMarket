@@ -1,11 +1,13 @@
 ﻿using System.Text;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
+using WebMarket.Domain.Settings;
 using WebMarket.Producer.Interfaces;
 
 namespace WebMarket.Producer;
 
-public class Producer : IMessageProducer
+public class Producer() : IMessageProducer
 {
     public void SendMessage<T>(T message, string routingKey, string? exchange = default)
     {
@@ -19,6 +21,5 @@ public class Producer : IMessageProducer
         });
         var body = Encoding.UTF8.GetBytes(json);
         channel.BasicPublish(exchange, routingKey, body: body);
-
     }
 }
